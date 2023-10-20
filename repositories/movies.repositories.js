@@ -5,7 +5,7 @@ const getMovies = (params) => {
         const page = parseInt(params.page) || 1
         const limit = parseInt(params.limit) || 10
         const offset = (page - 1) * limit
-        pool.query('SELECT * FROM movies LIMIT $1 OFFSET $2', [limit, offset], (err, results) => {
+        pool.query('SELECT * FROM movies ORDER BY id LIMIT $1 OFFSET $2', [limit, offset], (err, results) => {
             if(err) {
                 reject(err)
             }
