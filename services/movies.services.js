@@ -1,4 +1,4 @@
-const moviesRepo = require('../repositories')
+const { moviesRepo } = require('../repositories')
 
 const getMovies = async (res) => {
     const response = await moviesRepo.getMovies(res)

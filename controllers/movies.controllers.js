@@ -1,4 +1,4 @@
-const moviesService = require('../services')
+const { moviesService } = require('../services')
 
 const getMovie = async (req, res) => {
     const page = req.query.page
@@ -26,9 +26,9 @@ const getMovieById = async (req, res) => {
 
 const editMovie = async (req, res) => {
     const id = req.params.id
-    const {title, genres, year} = req.body
+    const { title, genres, year } = req.body
     try {
-        const result = await moviesService.editMovies({id, title, genres, year})
+        const result = await moviesService.editMovies({ id, title, genres, year })
         res.json(result)
     } catch(err) {
         res.status(500).send(err.message)
@@ -37,10 +37,6 @@ const editMovie = async (req, res) => {
 
 const addMovie = async (req, res) => {
     const {id, title, genres, year} = req.body
-    if (!id || !title || !genres || !year) {
-        res.status(400).send("Bad Request: Missing required data.");
-        return;
-    }
     try {
         const result = await moviesService.addMovies({id, title, genres, year})
         res.json(result)
@@ -60,7 +56,7 @@ const deleteMovie = async (req, res) => {
 }
 
 const uploadPhoto = async (req, res) => {
-    const id = req.params.id
+    const id = parseInt(req.params.id)
     const fileDirr = req.file.path
     const fileName = req.file.filename
     try {
